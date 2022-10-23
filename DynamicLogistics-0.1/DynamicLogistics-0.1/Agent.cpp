@@ -18,8 +18,7 @@ Agent::Agent(sf::RenderWindow& window) : _window(window)
 {
 	_windowSize = _window.getSize().x;
 	this->agentShape.setRadius(2.f);
-	this->position.x = _windowSize / 2 - agentShape.getRadius();
-	this->position.y = _windowSize / 2 - agentShape.getRadius();
+	this->position = sf::Vector2f{ 100.f, 150.f };
 	this->agentShape.setFillColor(sf::Color(51, 51, 51));
 	this->agentShape.setPosition(position);
 
@@ -38,7 +37,7 @@ void Agent::update(float dt, MapGrid& mapGrid)
 	//else
 	//{
 		int markersDirection = mapGrid.dirByMarkers(position, phase);
-		if (markersDirection != -1 && (rand() % 100) < 90)
+		if (markersDirection != -1 && (rand() % 100) < 95)
 		{
 			//cooldown = 0.5f;
 			desiredDirection.x += (float)cos(markersDirection * PI / 180);
@@ -64,12 +63,12 @@ void Agent::update(float dt, MapGrid& mapGrid)
 
 	if (mapGrid.isDestination(position, phase))
 	{
-		relevanceTime = 30.f;
+		relevanceTime = 50.f;
 		velocity = -velocity;
 		if (phase == ToNode)
 		{
 			phase = ToHub;
-			this->agentShape.setFillColor(sf::Color(255, 0, 255));
+			this->agentShape.setFillColor(sf::Color(0, 200, 50));
 		}
 		else
 		{

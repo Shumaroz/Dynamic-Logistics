@@ -17,7 +17,7 @@ private:
 	sf::Vector2f position;
 
 	CellType phase;
-	float relevanceTime = 30.f;
+	float relevanceTime = 50.f;
 
 	int _windowSize;
 	float wanderStrength = 0.15f;

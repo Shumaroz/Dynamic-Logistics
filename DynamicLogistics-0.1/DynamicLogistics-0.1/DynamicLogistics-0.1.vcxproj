@@ -87,11 +87,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>S:\_Spatium\Code\_periphery\SFML-2.5.1-64-bit\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\SFML-2.5.1-64-bit\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>S:\_Spatium\Code\_periphery\SFML-2.5.1-64-bit\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\SFML-2.5.1-64-bit\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

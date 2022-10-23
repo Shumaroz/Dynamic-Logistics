@@ -39,6 +39,18 @@ void Cell::changeCell(CellType t, float relevance)
 		if (relevance > intensity[1])
 			intensity[1] = relevance;
 		break;
+	case Hub:
+		type[0] = Hub;
+		type[1] = Pass;
+		intensity[0] = 100.f;
+		intensity[1] = 0.f;
+		break;
+	case Node:
+		type[0] = Node;
+		type[1] = Pass;
+		intensity[0] = 0.f;
+		intensity[1] = 100.f;
+		break;
 	default:
 		type[0] = t;
 		type[1] = Pass;
@@ -50,20 +62,23 @@ void Cell::changeCell(CellType t, float relevance)
 
 bool Cell::decreaseIntensity(float dt)
 {
-	if (intensity[0] > 0)
-		intensity[0] -= dt;
-	if (intensity[1] > 0)
-		intensity[1] -= dt;
-	if (type[0] == ToHub && intensity[0] < 0.02f)
+	if (!permanent)
 	{
-		intensity[0] = 0.f;
-		type[0] = Pass;
-		return false;
-	}
-	if (type[1] == ToNode && intensity[1] < 0.02)
-	{
-		intensity[1] = 0.f;
-		type[1] = Pass;
+		if (intensity[0] > 0)
+			intensity[0] -= dt;
+		if (intensity[1] > 0)
+			intensity[1] -= dt;
+		if (type[0] == ToHub && intensity[0] < 0.02f)
+		{
+			intensity[0] = 0.f;
+			type[0] = Pass;
+			return false;
+		}
+		if (type[1] == ToNode && intensity[1] < 0.02)
+		{
+			intensity[1] = 0.f;
+			type[1] = Pass;
+		}
 	}
 	return true;
 	//std::cout << intensity << '\n';

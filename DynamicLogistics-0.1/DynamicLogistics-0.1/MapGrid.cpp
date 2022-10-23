@@ -21,9 +21,10 @@ MapGrid::MapGrid(sf::RenderWindow& window) : _window(window)
 
 	markerTexture.display();
 
-	addJoints(Hub, sf::Vector2f{ (float)_windowSize / 2.f, (float)_windowSize / 2.f });
+	//addJoints(Hub, sf::Vector2f{ (float)_windowSize / 2.f, (float)_windowSize / 2.f });
+	addJoints(Hub, startPos);
 
-	addJoints(Node, sf::Vector2f{ 550.f, 550.f });
+	addJoints(Node, sf::Vector2f{ 650.f, 550.f });
 
 	/*markerShape.setFillColor(sf::Color(255, 0, 0));
 	markerShape.setPosition(322, 322);
@@ -39,11 +40,14 @@ MapGrid::~MapGrid()
 		}
 }
 
+sf::Vector2f MapGrid::getStartPos() { return startPos; }
+
 void MapGrid::update(float dt)
 {
 	for (int i = 0; i < height; i++)
 		for (int j = 0; j < width; j++)
 		{
+			//map[i][j]->decreaseIntensity(dt);
 			if (!map[i][j]->decreaseIntensity(dt))
 				updateTexture(Pass, map[i][j]->getPos());
 		}
@@ -146,13 +150,13 @@ void MapGrid::addJoints(CellType t, sf::Vector2f pos)
 	for (int i = -2; i <= 2; i++)
 		for (int j = -2; j <= 2; j++)
 		{
-			map[x + i][y + j]->changeCell(t, 0);
-			updateTexture(t, map[x + i][y + j]->getPos());
+			map[x + j][y + i]->changeCell(t, 0);
+			updateTexture(t, map[x + j][y + i]->getPos());
 		}
 
 	jointShapes.push_back(new sf::CircleShape);
 
 	jointShapes[jointShapes.size() - 1]->setRadius(10.f);
 	jointShapes[jointShapes.size() - 1]->setFillColor(sf::Color(51, 51, 51));
-	jointShapes[jointShapes.size() - 1]->setPosition(pos.x-10.f, pos.y-10.f);
+	jointShapes[jointShapes.size() - 1]->setPosition(x * coef_x + 10.f, y * coef_y + 10.f);
 }

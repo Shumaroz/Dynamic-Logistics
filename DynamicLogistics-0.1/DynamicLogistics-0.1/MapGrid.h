@@ -13,6 +13,8 @@ class MapGrid
 private:
 	const int pass = 0, marker = 1;
 	const int height = 200, width = 200;
+	const sf::Vector2f startPos = sf::Vector2f{ 100.f, 150.f };
+
 	sf::RenderWindow& _window;
 	std::vector<std::vector<Cell*>> map;
 	sf::RectangleShape markerShape;
@@ -26,6 +28,7 @@ private:
 public:
 	MapGrid(sf::RenderWindow& window);
 	~MapGrid();
+	sf::Vector2f getStartPos();
 	void update(float dt);
 	void render();
 	void updateTexture(CellType type, sf::Vector2i pos);
